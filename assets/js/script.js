@@ -1,6 +1,6 @@
 var generateHistory = function() {
     // get localStorage information
-    var cityHistory = JSON.parse(localStorage.getItem("city"));
+    var cityHistory = JSON.parse(localStorage.getItem("inputCity"));
     // create a div to act as a container for the old searches
     if (!$(".search-history-container")?.length && cityHistory?.length) {
         $(".city-column").append('<div class="search-history-container pt-4 border-top border-dark"></div>');
@@ -19,19 +19,21 @@ var generateHistory = function() {
 }
 
 var loadHistory = function() {
-    var lastSearched = JSON.parse(localStorage.getItem("city"));
+    var lastSearched = JSON.parse(localStorage.getItem("inputCity"));
     if (lastSearched?.length > 0) {
     //check to see if city history in in local
     //if in local get last searched city
-    let city = lastSearched[lastSearched.length - 1];
+    let lastCity = lastSearched[lastSearched.length - 1];
     //display last searched city's weather onload
-    createQuery(city);
+    console.log(lastCity);
+    createQuery(lastCity);
     generateHistory();
     }
 }
 
 var createQuery = function(city) {
-    var firstQuery = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=ae091cae15863695a3bd2a2f28f74012";
+    let inputCity = city ? city : $("#citySearch").val();
+    var firstQuery = "https://api.openweathermap.org/data/2.5/weather?q=" + inputCity + "&units=metric&appid=ae091cae15863695a3bd2a2f28f74012";
 
     $.ajax({
         url: firstQuery,
@@ -91,18 +93,18 @@ var haceclick = function() {
 
 $("#btn-search").on("click", function (event) {
         event.preventDefault();
-        city = $("#city-search").val();
-        if (city === "" || city === null){
+        let inputCity = $("#city-search").val();
+        if (inputCity === "" || inputCity === null){
             alert("Invalid Input");
         }
         else {
-            createQuery(city);
+            createQuery(inputCity);
             // get list of cities from local storage and if data doesn't exist, then create an empty array
-            var cityArray = JSON.parse(localStorage.getItem("city")) || [];
+            var cityArray = JSON.parse(localStorage.getItem("inputCity")) || [];
             // add inputCity to list
-            cityArray.push(city);
+            cityArray.push(inputCity);
             // re-save list of cities TO local storage
-            localStorage.setItem("city", JSON.stringify(cityArray));
+            localStorage.setItem("inputCity", JSON.stringify(cityArray));
             generateHistory(cityArray);
         }
 });
