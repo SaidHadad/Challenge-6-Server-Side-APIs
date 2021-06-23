@@ -52,7 +52,6 @@ var createQuery = function(city) {
             $(".todays-forecast").append(`<p class="city-wind">Wind Speed: ${uvExtendedData.current.wind_speed + " MPH"}</p>`);
             $(".todays-forecast").append(`<p>UV Index: <span class="${uivClassName(uvExtendedData.current.uvi)}">${uvExtendedData.current.uvi}</span></p>`);
 
-            
             // append divs to container
             $(".forecast-column").append('<div class="future-forecast"></div>');
             $(".future-forecast").append("<h2>5-Day Forecast:</h2>");
@@ -61,16 +60,17 @@ var createQuery = function(city) {
             // display current queried cities. date, weather icon, temperature, and humidity
             uvExtendedData?.daily?.map((day, index) => {
                 if (index > 0 && index < 6) {
-                    $(".card-deck").append(`<div class="card bg-info px-2 text-white" id="${'card' + index}">
+                    $(".card-deck").append(
+                        `<div class="card bg-info px-2 text-white" id="${'card' + index}">
                         <h7 class="card-title">${moment.unix(day.dt).format("M/DD/YYYY")}</h7>
                         <h6 class="card-subtitle"><img id="weatherIcon" src="https://openweathermap.org/img/wn/${day.weather[0].icon}.png"/></h6>
                         <p class="card-text p-0">Temp: ${day.temp.day + " &deg;C"}</p>
                         <h7 class="card-text">Humidity: ${day.humidity + "%"}</h7>
                         </div>`);
                 }
-        });
-    });
-});
+            });
+        })
+    })
 }
 
 var uivClassName = function (uvi) {
