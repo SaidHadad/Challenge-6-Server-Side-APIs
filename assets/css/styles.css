@@ -10,6 +10,30 @@ header h1 {
     margin: .25em;
 }
 
-#btn-city0 {
-    color: red;
+.uv-favorable,
+.uv-moderate,
+.uv-extreme,
+.uv-undefined {
+    font-weight: bold;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+/*< 4*/
+.uv-favorable {
+    background-color: rgb(43, 194, 43);
+}
+
+/*4-10*/
+.uv-moderate {
+    background-color: yellow;
+}
+
+/*>11*/
+.uv-extreme {
+    background-color: rgb(255, 148, 148);
+}
+
+.uv-undefined {
+    background-color: gray;
 }
