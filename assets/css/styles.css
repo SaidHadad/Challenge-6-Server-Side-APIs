@@ -9,3 +9,7 @@ header h1 {
     text-align: center;
     margin: .25em;
 }
+
+#btn-city0 {
+    color: red;
+}
