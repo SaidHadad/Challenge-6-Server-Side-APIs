@@ -1,4 +1,3 @@
-# Challenge-6-Server-Side-APIs
 <!-- PROJECT TITE -->
   <h1 align="center">Server-Side-APIs: Weather Dashboard</h1>
 
